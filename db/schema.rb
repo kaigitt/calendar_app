@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_011116) do
+ActiveRecord::Schema.define(version: 2021_01_20_014905) do
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.string "name"
@@ -19,38 +25,9 @@ ActiveRecord::Schema.define(version: 2021_01_20_011116) do
     t.datetime "updated_at", null: false
   end
 
-  def date_before_start
-    errors.add(:start_time, "は過去の日付を選択できません") if start_time < Date.today
+  create_table "scrapings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  def start_time_not_sunday
-    errors.add(:start_time, "は日曜日を選択できません") if start_time.sunday?
-  end
-
-  def start_time_not_saturday
-    errors.add(:start_time, "は土曜日を選択できません") if start_time.saturday?
-  end
-
-  def time_only
-    if hour_only_1 && min_only
-      true
-    elsif hour_only_2 && min_only
-      true
-    else
-      errors.add(:start_time, "(時間)は13:15もしくは19:15になります")
-    end
-  end
-
-  def hour_only_19
-    start_time.hour == 19
-  end
-
-  def hour_only_13
-    start_time.hour == 13
-  end
-
-  def min_only
-    start_time.min == 15
-  end
-end
 end

@@ -1,0 +1,10 @@
+<table>
+  <% @books.each do |book| %>
+    <% if book.name.present?%>
+  <tr>
+    <td><%= book.name %></td>
+    <td></td>
+  </tr>
+    <% end %>
+  <% end %>
+</table>
