@@ -11,4 +11,6 @@ class Scraping < ApplicationRecord
         book.save
       end
     end
+    
+    #scrapingを応用課題で
 end
